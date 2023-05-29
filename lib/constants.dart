@@ -1,0 +1,1 @@
+const baseUrl = 'http://tickets.docudays.org.ua/v1/mobile_app/usher';
