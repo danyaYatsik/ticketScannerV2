@@ -4,6 +4,7 @@ part of 'scan_bloc.dart';
 class ScanState with _$ScanState {
   const factory ScanState({
     required Screening screening,
+    required bool isLoading,
     String? barcode,
     BarcodeStatus? barcodeStatus,
   }) = _ScanState;

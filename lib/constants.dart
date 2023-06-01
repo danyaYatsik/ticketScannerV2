@@ -1,1 +1,1 @@
-const baseUrl = 'http://tickets.docudays.org.ua/v1/mobile_app/usher';
+const baseUrl = 'https://tickets.docudays.ua/v1/mobile_app/usher';
