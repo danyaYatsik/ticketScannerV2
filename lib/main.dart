@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:ticket_scanner/bloc/just_check/just_check_bloc.dart';
 import 'package:ticket_scanner/bloc/scan/scan_bloc.dart';
 import 'package:ticket_scanner/bloc/screenings/screenings_bloc.dart';
 import 'package:ticket_scanner/view/pages/just_check_page.dart';
@@ -15,14 +16,13 @@ void main() {
   runApp(const MyApp());
 }
 
-//todo: implement router
-
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Ticket Scanner',
       theme: ThemeData(primarySwatch: Colors.grey),
       initialRoute: screeningsRoute,
@@ -44,8 +44,12 @@ class MyApp extends StatelessWidget {
                 child: const ScanPage(),
               );
             case justCheckRoute:
-              return const JustCheckPage();
-            default: throw Exception('Unknown route');
+              return BlocProvider(
+                create: (context) => JustCheckBloc(),
+                child: const JustCheckPage(),
+              );
+            default:
+              throw Exception('Unknown route');
           }
         },
       ),

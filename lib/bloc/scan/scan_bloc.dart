@@ -25,8 +25,7 @@ class ScanBloc extends Bloc<ScanEvent, ScanState> {
 
   void _checkBarcode(String barcode, Emitter<ScanState> emit) async {
     emit(state.copyWith(isLoading: true, barcode: barcode, barcodeStatus: null));
-    final barcodeStatus = await _barcodeRepository.checkBarcode(screeningId: state.screening.id, barcode: barcode);
-    await Future.delayed(Duration(seconds: 5));
+    final barcodeStatus = await _barcodeRepository.verifyBarcode(screeningId: state.screening.id, barcode: barcode);
     barcodeStatus.status.when(
       ok: () => audioPlayer.play(AssetSource('sounds/success.mp3')),
       error: () => audioPlayer.play(AssetSource('sounds/failed.mp3')),

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ticket_scanner/bloc/screenings/screenings_bloc.dart';
 import 'package:ticket_scanner/main.dart';
+import 'package:ticket_scanner/view/widgets/just_check_secret_button.dart';
 import 'package:ticket_scanner/view/widgets/screening_widget.dart';
 
 class ScreeningsPage extends StatelessWidget {
@@ -27,45 +28,29 @@ class ScreeningsPage extends StatelessWidget {
                 );
               }
 
-              return Column(
-                children: [
-                  Flexible(
-                    child: ListView.separated(
-                      itemCount: state.searchedScreenings.length,
-                      separatorBuilder: (context, index) {
-                        return Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 20),
-                          child: Container(
-                            color: Colors.grey,
-                            height: 1,
-                          ),
-                        );
-                      },
-                      itemBuilder: (context, index) {
-                        final screening = state.searchedScreenings[index];
-                        return GestureDetector(
-                          onTap: () => Navigator.pushNamed(context, scanRoute, arguments: {screeningArg: screening}),
-                          child: ListTile(
-                            title: Text(screening.name),
-                            subtitle: Text(screening.description),
-                            dense: true,
-                          ),
-                          //child: ScreeningWidget(screening),
-                        );
-                      },
+              return ListView.separated(
+                itemCount: state.searchedScreenings.length,
+                separatorBuilder: (context, index) {
+                  return Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 20),
+                    child: Container(
+                      color: Colors.grey,
+                      height: 1,
                     ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 4),
-                    child: MaterialButton(
-                      onPressed: () => Navigator.pushNamed(context, justCheckRoute),
-                      color: Colors.grey[400],
-                      padding: const EdgeInsets.all(0),
-                      minWidth: double.infinity,
-                      child: Text('Просто чек'),
+                  );
+                },
+                itemBuilder: (context, index) {
+                  final screening = state.searchedScreenings[index];
+                  return GestureDetector(
+                    onTap: () => Navigator.pushNamed(context, scanRoute, arguments: {screeningArg: screening}),
+                    child: ListTile(
+                      title: Text(screening.name),
+                      subtitle: Text(screening.description),
+                      dense: true,
                     ),
-                  ),
-                ],
+                    //child: ScreeningWidget(screening),
+                  );
+                },
               );
             },
           ),
@@ -75,7 +60,7 @@ class ScreeningsPage extends StatelessWidget {
   }
 
   AppBar _usualAppBar(Bloc bloc) => AppBar(
-        title: const Text('Сеанси'),
+        title: const JustCheckSecretButton(child: Text('Сеанси')),
         actions: [
           IconButton(
             onPressed: () => bloc.add(const ScreeningsEvent.toggleSearchMode()),
@@ -99,4 +84,7 @@ class ScreeningsPage extends StatelessWidget {
           ),
         ],
       );
+
 }
+
+

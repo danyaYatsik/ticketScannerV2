@@ -16,7 +16,7 @@ class ScanWidget extends StatelessWidget {
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
-/*        Flexible(
+        Flexible(
           child: MobileScanner(
             controller: scannerController,
             onDetect: (barcodes) {
@@ -26,7 +26,7 @@ class ScanWidget extends StatelessWidget {
               }
             },
           ),
-        ),*/
+        ),
         HandlyBarcodeInput(onSubmit: onDetected),
       ],
     );
