@@ -16,7 +16,9 @@ class BarcodeRepository {
   }
   
   Future<JustCheckResult> justCheckBarcode(String barcode) async {
-    await _dio.post('$baseUrl/check_babrcode/wa_attendie');
+    await _dio.post('$baseUrl/check_babrcode/wa_attendie', data: {
+      'barcode': barcode,
+    });
     return JustCheckResult();
   }
 }

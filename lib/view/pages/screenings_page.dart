@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ticket_scanner/bloc/screenings/screenings_bloc.dart';
 import 'package:ticket_scanner/main.dart';
 import 'package:ticket_scanner/view/widgets/just_check_secret_button.dart';
-import 'package:ticket_scanner/view/widgets/screening_widget.dart';
 
 class ScreeningsPage extends StatelessWidget {
   final textController = TextEditingController();
