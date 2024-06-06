@@ -7,7 +7,7 @@ import 'package:ticket_scanner/view/widgets/just_check_secret_button.dart';
 class ScreeningsPage extends StatelessWidget {
   final textController = TextEditingController();
 
-  ScreeningsPage({Key? key}) : super(key: key);
+  ScreeningsPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -59,7 +59,7 @@ class ScreeningsPage extends StatelessWidget {
   }
 
   AppBar _usualAppBar(Bloc bloc) => AppBar(
-        title: const JustCheckSecretButton(child: Text('Сеанси')),
+        title: const SecretPageButton(child: Text('Сеанси')),
         actions: [
           IconButton(
             onPressed: () => bloc.add(const ScreeningsEvent.toggleSearchMode()),

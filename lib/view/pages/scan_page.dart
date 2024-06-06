@@ -7,7 +7,7 @@ import 'package:ticket_scanner/view/widgets/barcode_status/barcode_status_widget
 import 'package:ticket_scanner/view/widgets/scan_widget.dart';
 
 class ScanPage extends StatelessWidget {
-  const ScanPage({Key? key}) : super(key: key);
+  const ScanPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +23,10 @@ class ScanPage extends StatelessWidget {
           body: Stack(
             children: [
               ScanWidget(
-                onDetected: (barcode) => bloc.add(ScanEvent.checkBarcode(barcode: barcode)),
+                onDetected: (barcode) {
+                  print(barcode);
+                  bloc.add(ScanEvent.checkBarcode(barcode: barcode));
+                }
               ),
               BlocBuilder<ScanBloc, ScanState>(
                 builder: (context, state) {

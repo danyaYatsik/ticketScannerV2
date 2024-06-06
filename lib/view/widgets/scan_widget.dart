@@ -5,7 +5,7 @@ import 'package:ticket_scanner/view/widgets/handly_barcode_input.dart';
 class ScanWidget extends StatelessWidget {
   final scannerController = MobileScannerController(
     formats: [BarcodeFormat.code128, BarcodeFormat.ean8],
-    detectionTimeoutMs: 1000,
+    detectionTimeoutMs: 5000,
   );
   final void Function(String)? onDetected;
 

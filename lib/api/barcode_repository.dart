@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:ticket_scanner/constants.dart';
 import 'package:ticket_scanner/model/barcode_status/barcode_status.dart';
 import 'package:ticket_scanner/model/just_check_result.dart';
+import 'package:ticket_scanner/preferences.dart';
 
 class BarcodeRepository {
   final _dio = Dio();
@@ -10,6 +11,7 @@ class BarcodeRepository {
     final response = await _dio.post('$baseUrl/check_babrcode', data: {
       'screening_code': screeningId,
       'barcode': barcode,
+      'installation_uuid': Preferences().provideUuid(),
     });
 
     return BarcodeStatus.fromJson(response.data);

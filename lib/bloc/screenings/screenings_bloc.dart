@@ -1,4 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_logs/flutter_logs.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:ticket_scanner/api/screenings_repository.dart';
 import 'package:ticket_scanner/model/screening/screening.dart';
@@ -8,6 +9,12 @@ part 'screenings_bloc.freezed.dart';
 part 'screenings_state.dart';
 
 part 'screenings_event.dart';
+
+void _log(String message, {LogLevel level = LogLevel.INFO}) => FlutterLogs.logThis(
+  tag: "ScreeningsBloc",
+  level: level,
+  logMessage: message,
+);
 
 class ScreeningsBloc extends Bloc<ScreeningsEvent, ScreeningsState> {
   final _screeningsRepository = ScreeningsRepository();
@@ -25,6 +32,7 @@ class ScreeningsBloc extends Bloc<ScreeningsEvent, ScreeningsState> {
   void _loadScreenings(Emitter<ScreeningsState> emit) async {
     emit(state.copyWith(isScreeningsLoading: true));
     final List<Screening> screenings = await _screeningsRepository.getScreenings();
+    _log("Screenings loaded: $screenings");
     emit(state.copyWith(isScreeningsLoading: false, screenings: screenings, searchedScreenings: screenings));
   }
 
